@@ -1,0 +1,105 @@
+--ABAIXO ESTARÁ A LIB DA NOSSA UI 
+
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/7yhx/kwargs_Ui_Library/main/source.lua"))()
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Team = LocalPlayer.TeamColor
+
+local UI = Lib:Create{
+    Theme = "Dark", -- or any other theme
+    Size = UDim2.new(0, 555, 0, 400) -- default
+ }
+ 
+ local Main = UI:Tab{
+    Name = "Inicio"
+ }
+ 
+ local Divider = Main:Divider{
+    Name = "Inicio shit"
+ }
+ 
+ local QuitDivider = Main:Divider{
+    Name = "Saior"
+ }
+ 
+ -- Defina o raio de ataque padrão
+local attackRadius = 10
+
+-- Defina a cor do menu
+local menuColor = Color3.fromRGB(0, 255, 0) -- verde
+
+-- Crie um objeto de menu
+local menu = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local onButton = Instance.new("TextButton")
+local offButton = Instance.new("TextButton")
+local fovSlider = Instance.new("TextLabel")
+local slider = Instance.new("TextButton")
+local sliderFill = Instance.new("Frame")
+local sliderHandle = Instance.new("Frame")
+
+-- Configure o objeto de menu
+menu.Name = "AutoAttackMenu"
+menu.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+frame.Name = "Frame"
+frame.Parent = menu
+frame.BackgroundColor3 = menuColor
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.Size = UDim2.new(0, 200, 0, 100)
+onButton.Name = "OnButton"
+onButton.Parent = frame
+onButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+onButton.Position = UDim2.new(0.05, 0, 0.1, 0)
+onButton.Size = UDim2.new(0, 80, 0, 30)
+onButton.Font = Enum.Font.SourceSans
+onButton.Text = "Script Ligado"
+onButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+onButton.TextSize = 14
+offButton.Name = "OffButton"
+offButton.Parent = frame
+offButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+offButton.Position = UDim2.new(0.55, 0, 0.1, 0)
+offButton.Size = UDim2.new(0, 80, 0, 30)
+offButton.Font = Enum.Font.SourceSans
+offButton.Text = "Script Desligado"
+offButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+offButton.TextSize = 14
+fovSlider.Name = "FOVSlider"
+fovSlider.Parent = frame
+fovSlider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+fovSlider.Position = UDim2.new(0.05, 0, 0.5, 0)
+fovSlider.Size = UDim2.new(0, 80, 0, 30)
+fovSlider.Font = Enum.Font.SourceSans
+fovSlider.Text = "FOV"
+fovSlider.TextColor3 = Color3.fromRGB(0, 0, 0)
+fovSlider.TextSize = 14
+slider.Name = "Slider"
+slider.Parent = fovSlider
+slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+slider.Position = UDim2.new(1.2, 0, 0, 0)
+slider.Size = UDim2.new(0, 100, 0, 30)
+slider.Font = Enum.Font.SourceSans
+slider.Text = ""
+slider.TextColor3 = Color3.fromRGB(0, 0, 0)
+slider.TextSize = 14
+sliderFill.Name = "SliderFill"
+sliderFill.Parent = slider
+sliderFill.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+sliderFill.BorderSizePixel = 0
+sliderFill.Position = UDim2.new(0, 0, 0.5, 0)
+sliderFill.Size = UDim2.new(0, 0, 0, 5)
+sliderHandle.Name = "SliderHandle"
+sliderHandle.Parent = sliderFill
+sliderHandle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+sliderHandle.BorderSizePixel = 0
+sliderHandle.Position = UDim2.new(0, -5, -0.5, 0)
+sliderHandle.Size = UDim2.new(0, 10, 0, 10)
+
+-- Defina a função de ataque
+local function attack()
+    -- Obtenha todos os NPCs hostis dentro do raio de ataque
+    local hostileNPCs = {}
+    for _, npc in pairs(game.Workspace:GetChildren()) do
+        if npc:IsA("Model") and npc:FindFirstChild("Humanoid") and npc.Humanoid.Health > 0 and npc:FindFirstChild("Head") then
+            local distance = (npc.Head.Position
